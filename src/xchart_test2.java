@@ -35,7 +35,6 @@ public class xchart_test2 {
 		Scanner data = new Scanner(new File(dataPath));
 		Scanner dates = new Scanner(new File(datesPath));
 		
-		
 		writeToFile();
 		readFiles(dataBr, datesBr, data, dates);
 	 
