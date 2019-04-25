@@ -1,6 +1,8 @@
 /** Tämä tallentaa syötetyn painon tiedostoon ja tulostaa sen graafille. Käyttää xChartia.
- * https://knowm.org/open-source/XChart/
+ * <a href="https://knowm.org/open-source/XChart/>xChart</a>
+ * 
  * @author Eve
+ * @version 0.1
  */
 
 import java.io.BufferedReader;
@@ -45,6 +47,10 @@ public class xchart_test2 {
 	    new SwingWrapper(chart).displayChart();
 	}
 	
+	/**
+	 * 
+	 * @throws IOException
+	 */
 	public static void writeToFile() throws IOException {
 		String string = "";
 		FileWriter writeToFile = new FileWriter(dataPath, true);
@@ -66,45 +72,52 @@ public class xchart_test2 {
 		writeToFile.write("\n" + string);
 	    writeToFile.close();
 	}//writeToFile
-	
+	/**
+	 * 
+	 * @param BufferedReader of Data
+	 * @param BufferedReader of Dates
+	 * @param data
+	 * @param dates
+	 * @throws IOException
+	 */
 	public static void readFiles(BufferedReader dataBr, BufferedReader datesBr, Scanner data, Scanner dates) throws IOException {
 			//collect 5 last lines from dates
-				List<String> datesLastLines = new LinkedList<String>();
-				for(String tmp; (tmp = datesBr.readLine()) != null;) {
-				    if (datesLastLines.add(tmp) && datesLastLines.size() > noOfData) {
-				    	datesLastLines.remove(0);
-				    }}
-				
-				//collect 5 last lines from dates
-						List<String> dataLastLines = new LinkedList<String>();
-						for(String tmp; (tmp = dataBr.readLine()) != null;) {
-						    if (dataLastLines.add(tmp) && dataLastLines.size() > noOfData) {
-						    	dataLastLines.remove(0);
-						    }}
+//				List<String> datesLastLines = new LinkedList<String>();
+//				for(String tmp; (tmp = datesBr.readLine()) != null;) {
+//				    if (datesLastLines.add(tmp) && datesLastLines.size() > noOfData) {
+//				    	datesLastLines.remove(0);
+//				    }}
+//				
+//				//collect 5 last lines from dates
+//						List<String> dataLastLines = new LinkedList<String>();
+//						for(String tmp; (tmp = dataBr.readLine()) != null;) {
+//						    if (dataLastLines.add(tmp) && dataLastLines.size() > noOfData) {
+//						    	dataLastLines.remove(0);
+//						    }}
 		
-//		List<String> datesLastLines = readLastLines(datesBr);
-//		List<String> dataLastLines = readLastLines(dataBr);
+		double[] datesLastLines = readLastLines(datesBr, noOfData);
+		double[] dataLastLines = readLastLines(dataBr, noOfData);
 		
 				System.out.println("Dates:" + datesLastLines);
 				System.out.println("Data:" + dataLastLines);
 				
 				//read string list lines
-				for (int i = 0; i < datesLastLines.size(); i++) {
-					//convert string to double
-					Double lastLinesDouble = Double.parseDouble(datesLastLines.get(i));
-					//save double
-					Double datesrivi = lastLinesDouble;
-					xData[i] = datesrivi;
-				}//while
-				
-				//read string list lines
-				for (int i = 0; i < dataLastLines.size(); i++) {
-					//convert string to double
-					Double lastLinesDouble = Double.parseDouble(dataLastLines.get(i));
-					//save double
-					Double datarivi = lastLinesDouble;
-					yData[i] = datarivi;
-				}//while
+//				for (int i = 0; i < datesLastLines.size(); i++) {
+//					//convert string to double
+//					Double lastLinesDouble = Double.parseDouble(datesLastLines.get(i));
+//					//save double
+//					Double datesrivi = lastLinesDouble;
+//					xData[i] = datesrivi;
+//				}//while
+//				
+//				//read string list lines
+//				for (int i = 0; i < dataLastLines.size(); i++) {
+//					//convert string to double
+//					Double lastLinesDouble = Double.parseDouble(dataLastLines.get(i));
+//					//save double
+//					Double datarivi = lastLinesDouble;
+//					yData[i] = datarivi;
+//				}//while
 		
 //		xData = readLastLines(datesBr);
 //		yData = readLastLines(dataBr);
@@ -112,27 +125,33 @@ public class xchart_test2 {
 				data.close();
 				dates.close();
 	}
-	
-//	public static double[] readLastLines(BufferedReader br) throws IOException {
-//		double rivi = 0;
-//		
-//		//collect 5 last lines from dates
-//		List<String> lastLines = new LinkedList<String>();
-//		for(String tmp; (tmp = br.readLine()) != null;) {
-//		    if (lastLines.add(tmp) && lastLines.size() > noOfData) {
-//		    	lastLines.remove(0);
-//		    }//if
-//		}//for
-//		
-//		//read string list lines
-//		for (int i = 0; i < lastLines.size(); i++) {
-//			//convert string to double
-//			Double lastLinesDouble = Double.parseDouble(lastLines.get(i));
-//			//save double
-//			rivi = lastLinesDouble;
-//			yData[i] = rivi;
-//		}//while
-//		return yData;
-//		//return lastLines;
-//	}
+	/**
+	 * 
+	 * @param BufferedReader, either Data or Dates
+	 * @return
+	 * @throws IOException
+	 */
+	public static double[] readLastLines(BufferedReader br, int noOfData) throws IOException {
+		double rivi = 0;
+		double[] data = new double[noOfData];
+		
+		//collect 5 last lines from dates
+		List<String> lastLines = new LinkedList<String>();
+		for(String tmp; (tmp = br.readLine()) != null;) {
+		    if (lastLines.add(tmp) && lastLines.size() > noOfData) {
+		    	lastLines.remove(0);
+		    }//if
+		}//for
+		
+		//read string list lines
+		for (int i = 0; i < lastLines.size(); i++) {
+			//convert string to double
+			Double lastLinesDouble = Double.parseDouble(lastLines.get(i));
+			//save double
+			rivi = lastLinesDouble;
+			data[i] = rivi;
+		}//while
+		return data;
+		//return lastLines;
+	}
 }
