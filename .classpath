@@ -6,7 +6,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="J:/Documents/TurkuAMK/Ohjelmoinnin perusteet Toisto/PetWeight2/xchart-3.5.4.jar">
+	<classpathentry kind="lib" path="C:/Users/Eve/Documents/TurkuAMK/Ohjelmoinnin perusteet toisto/PetWeight/xchart-3.5.4/xchart-3.5.4.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>

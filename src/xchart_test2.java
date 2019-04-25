@@ -38,7 +38,9 @@ public class xchart_test2 {
 		Scanner dates = new Scanner(new File(datesPath));
 		
 		writeToFile();
-		readFiles(dataBr, datesBr, data, dates);
+		xData = readLastLines(datesBr, noOfData);
+		yData = readLastLines(dataBr, noOfData);
+//		readFiles(dataBr, datesBr, data, dates);
 	 
 	    // Create Chart
 	    XYChart chart = QuickChart.getChart("Pet Weight", "Days", "Weight (g)", "y(x)", xData, yData);
@@ -72,63 +74,11 @@ public class xchart_test2 {
 		writeToFile.write("\n" + string);
 	    writeToFile.close();
 	}//writeToFile
-	/**
-	 * 
-	 * @param BufferedReader of Data
-	 * @param BufferedReader of Dates
-	 * @param data
-	 * @param dates
-	 * @throws IOException
-	 */
-	public static void readFiles(BufferedReader dataBr, BufferedReader datesBr, Scanner data, Scanner dates) throws IOException {
-			//collect 5 last lines from dates
-//				List<String> datesLastLines = new LinkedList<String>();
-//				for(String tmp; (tmp = datesBr.readLine()) != null;) {
-//				    if (datesLastLines.add(tmp) && datesLastLines.size() > noOfData) {
-//				    	datesLastLines.remove(0);
-//				    }}
-//				
-//				//collect 5 last lines from dates
-//						List<String> dataLastLines = new LinkedList<String>();
-//						for(String tmp; (tmp = dataBr.readLine()) != null;) {
-//						    if (dataLastLines.add(tmp) && dataLastLines.size() > noOfData) {
-//						    	dataLastLines.remove(0);
-//						    }}
-		
-		double[] datesLastLines = readLastLines(datesBr, noOfData);
-		double[] dataLastLines = readLastLines(dataBr, noOfData);
-		
-				System.out.println("Dates:" + datesLastLines);
-				System.out.println("Data:" + dataLastLines);
-				
-				//read string list lines
-//				for (int i = 0; i < datesLastLines.size(); i++) {
-//					//convert string to double
-//					Double lastLinesDouble = Double.parseDouble(datesLastLines.get(i));
-//					//save double
-//					Double datesrivi = lastLinesDouble;
-//					xData[i] = datesrivi;
-//				}//while
-//				
-//				//read string list lines
-//				for (int i = 0; i < dataLastLines.size(); i++) {
-//					//convert string to double
-//					Double lastLinesDouble = Double.parseDouble(dataLastLines.get(i));
-//					//save double
-//					Double datarivi = lastLinesDouble;
-//					yData[i] = datarivi;
-//				}//while
-		
-//		xData = readLastLines(datesBr);
-//		yData = readLastLines(dataBr);
-				
-				data.close();
-				dates.close();
-	}
-	/**
+
+	/**Reads the last five (noOfData) lines of both Data and Dates -files.
 	 * 
 	 * @param BufferedReader, either Data or Dates
-	 * @return
+	 * @return the last five lines as double list
 	 * @throws IOException
 	 */
 	public static double[] readLastLines(BufferedReader br, int noOfData) throws IOException {
